@@ -1,25 +1,35 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+PImage Left;
+PImage Right;
+PImage Middle;
 int numFrames = 3;
 int screen = 0;
 int value = 0;
 
-PImage [] image = new PImage[numFrames];
+float image[];
 
 void setup()
 {
   fullScreen();
-  background(value); 
-  for (int i=0; i<numFrames; i++)
-  {
-    image[0] = loadImage("left cat.png");
-    image[1] = loadImage("middle cat.png");
-    image[2] = loadImage("right cat.png");
-  }
+  background(value);
+  Left = loadImage("left cat.png");
+  Right = loadImage("right cat.png");
+  Middle = loadImage("middle cat.png");
+
 }
 
 void draw()
 {
   rect(150, 300, 200, 400);
   fill(144);
+  rect(225, 500, 50, 100);
+  fill(200);
   if (screen == 0);
   {
     LightOff();
@@ -33,21 +43,23 @@ void draw()
 
 void LightOn()
 {
+  image(Middle, 720, 450, 300, 300);
   value = 255;
 }
 
 void LightOff()
 {
+  image(Left, 720, 450, 300, 300);
   value = 0;
 }
 
-void mousePressed()
+void mouseReleased()
 {
-  if (screen == 0)
+  if (screen == 0 && mouseX>255 && mouseX<275 && mouseY>500 && mouseY<600)
   {
     screen = 1;
   }
-  if (screen == 1)
+  if (screen == 1 && mouseX>255 && mouseX<275 && mouseY>500 && mouseY<600)
   {
     screen = 0;
   }
